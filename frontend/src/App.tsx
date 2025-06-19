@@ -14,7 +14,7 @@ function App() {
       <CompanyInfo />
       <About />
       <Team></Team>
-
+      <Contact></Contact>
       
     </>
   );
