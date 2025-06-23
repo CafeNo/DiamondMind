@@ -1,6 +1,6 @@
 const Navbar = () => (
-  <nav className="bg-white border-gray-200 dark:bg-gray-900 sticky top-0">
-    <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
+  <nav className="bg-white bg-opacity-50 border-gray-200 dark:bg-gray-900 dark:bg-opacity-50 sticky top-0 backdrop-blur-md">
+    <div className="max-w-screen-xl mx-auto flex items-center justify-center p-4">
       <ul className="flex space-x-4 text-gray-800 dark:text-slate-50">
         <li>
           <a href="#">Home</a>
@@ -17,3 +17,4 @@ const Navbar = () => (
 );
 
 export default Navbar;
+

@@ -1,7 +1,7 @@
 const About = () => (
-  <section className="min-h-[50vh] flex flex-col items-center overflow-hidden bg-black px-4 py-16 ">
+  <section className="min-h-[50vh] flex flex-col items-center overflow-hidden px-4 py-16 ">
 
-    <div className="text-center w-full max-w-5xl text-white">
+    <div className="text-center w-full max-w-5xl">
       <p className="text-7xl font-semibold mb-10">About</p>
       <p className="text-2xl font-semibold ">
         Lorem Ipsum is simply dummy text of the printing and typesetting
