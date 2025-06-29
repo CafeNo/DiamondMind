@@ -3,7 +3,7 @@ import CompanyInfo from "./components/CompanyInfo";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import About from "./components/About";
-import Navbar from "./components/ิnavbar";
+import Navbar from "./components/Navbar";
 import Team from "./components/Team";
 
 function App() {
@@ -13,9 +13,8 @@ function App() {
       <Navbar />
       <CompanyInfo />
       <About />
-      <Team></Team>
-      <Contact></Contact>
-      
+      <Team />
+      <Contact />
     </>
   );
 }

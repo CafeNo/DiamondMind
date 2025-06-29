@@ -1,6 +1,5 @@
 const About = () => (
   <section className="min-h-[50vh] flex flex-col items-center overflow-hidden px-4 py-16 ">
-
     <div className="text-center w-full max-w-5xl">
       <p className="text-7xl font-semibold mb-10">About</p>
       <p className="text-2xl font-semibold ">
@@ -17,7 +16,7 @@ const About = () => (
 
       <div className="w-full flex justify-center">
         <iframe
-          className="w-full max-w-[700px] aspect-video rounded-lg shadow-lg"
+          className="w-full max-w-[700px] aspect-video rounded-lg shadow-lg border-4 border-gray-300"
           src="https://www.youtube.com/embed/VKvEDW98foU"
           frameBorder="0"
           allowFullScreen
@@ -25,12 +24,17 @@ const About = () => (
         ></iframe>
       </div>
 
-      <button
-        type="button"
-        class="py-4  px-12 mt-14 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-      >
-        Alternative
-      </button>
+      <div class="flex justify-center items-center gap-12 h-full mt-10">
+        <div class="bg-gradient-to-b from-stone-300/40 to-transparent p-[4px] rounded-[16px]">
+          <button class="group p-[4px] rounded-[12px] bg-gradient-to-b from-white to-stone-200/40 shadow-[0_1px_3px_rgba(0,0,0,0.5)] active:shadow-[0_0px_1px_rgba(0,0,0,0.5)] active:scale-[0.995]">
+            <div class="bg-gradient-to-b from-stone-200/40 to-white/80 rounded-[8px] px-2 py-2">
+              <div class="flex gap-2 items-center">
+                <span class="font-semibold">Get Started</span>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
     </div>
   </section>
 );
