@@ -1,25 +1,18 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "lenis";
+import MagicalEffects from "./MagicalEffects";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Header = () => {
   useEffect(() => {
-    const lenis = new Lenis();
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
-
     const trigger = document.querySelector("[data-parallax-layers]") as HTMLElement;
     if (!trigger) return;
 
     const layers = [
-      { layer: 1, yPercent: 70 },
-      { layer: 2, yPercent: 55 },
+      { layer: 1, yPercent: 5 },
+      { layer: 2, yPercent: 85 },
       { layer: 3, yPercent: 40 },
       { layer: 4, yPercent: 10 },
     ];
@@ -29,7 +22,7 @@ const Header = () => {
         trigger,
         start: "0% 0%",
         end: "100% 0%",
-        scrub: 0,
+        scrub: 1,
       },
     });
 
@@ -39,43 +32,78 @@ const Header = () => {
         tl.to(el, { yPercent: l.yPercent, ease: "none" }, i === 0 ? undefined : "<");
       }
     });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
   return (
 
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 h-[120%] w-full" data-parallax-layers>
+        {/* Layer 1: Aurelia Background (parallax moving layer) with zoom */}
         <img
           data-parallax-layer="1"
-          src="https://cdn.discordapp.com/attachments/1194304311149203476/1287419435170402469/20_20240922212247.jpg?ex=682d3988&is=682be808&hm=704ce5be9bbbeb59963969a7f42afdd3d1c07136a28846d3d33cf2f22117a131&"
-          // src="https://cdn.prod.website-files.com/671752cd4027f01b1b8f1c7f/6717795be09b462b2e8ebf71_osmo-parallax-layer-3.webp"
-          className="absolute w-full h-auto top-[-17.5%] object-cover pointer-events-none"
-          alt=""
+          src="/aurelia_bg.png"
+          className="absolute w-full h-full top-0 object-cover pointer-events-none z-[1] transform scale-110 hover:scale-115 transition-transform duration-[3s] ease-out"
+          alt="Aurelia Background"
         />
-        <img 
-          data-parallax-layer="2"
-          src="https://media.discordapp.net/attachments/1194304311149203476/1305174905913999381/19_20241110211145.png?ex=682d381a&is=682be69a&hm=ae71e22f8417a75920c7a0b5edbde5819d57c34cc1fbbaa9f8470b073dc4669d&=&format=webp&quality=lossless&width=636&height=900"
-          // src="https://cdn.prod.website-files.com/671752cd4027f01b1b8f1c7f/6717795b4d5ac529e7d3a562_osmo-parallax-layer-2.webp"
-          className="absolute w-full h-auto top-[-17.5%] object-cover pointer-events-none"
-          alt=""
-        />
-        <div
-          data-parallax-layer="3"
-          className="absolute inset-0 flex items-center justify-center"
-        >
-          <h1 className="text-[11vw] font-extrabold font-['PP Neue Corp Wide','sans-serif']">
-            Aurelia
-          </h1>
-        </div>
+        
+        {/* Layer 2: Aurelia Logo (parallax moving layer) */}
         <img
-          data-parallax-layer="4"
-          // src="Key_visual_fN_png.png"
-          src="https://cdn.prod.website-files.com/671752cd4027f01b1b8f1c7f/6717795bb5aceca85011ad83_osmo-parallax-layer-1.webp"
-          className="absolute w-full h-auto top-[-17.5%] object-cover pointer-events-none"
-          alt=""
+          data-parallax-layer="2"
+          src="/aurelia_logo.png"
+          className="absolute w-full h-auto top-[-10%] left-1/2 transform -translate-x-1/2 object-contain pointer-events-none z-[2]"
+          alt="Aurelia Logo"
         />
+
+        {/* Layer 3: Aurelia Characters (on top of logo) */}
+        <img 
+          data-parallax-layer="3"
+          src="/aurelia_charactors.png"
+          className="absolute w-3/4 h-auto top-[0%] left-1/2 transform -translate-x-1/2 object-contain pointer-events-none z-[3]"
+          alt="Aurelia Characters"
+        />
+        
+
+        
+        {/* Magical Effects Layer - Reduced and positioned away from header */}
+        <div className="absolute bottom-0 left-0 w-full h-1/3 z-[5]">
+          <MagicalEffects variant="minimal" intensity="low" />
+        </div>
       </div>
-      <div className="absolute bottom-0 w-full h-20 from-black to-transparent bg-gradient-to-t pointer-events-none"></div>
+      
+      {/* Enhanced bottom transition effect */}
+      <div className="absolute bottom-0 w-full h-32 pointer-events-none">
+        {/* Main gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+        
+        {/* Shirin blue overlay effect */}
+        <div className="absolute inset-0 bg-gradient-to-t from-shirin-blue/20 via-shirin-purple/10 to-transparent"></div>
+        
+        {/* Floating sparkles */}
+        <div className="absolute bottom-8 left-1/4 w-3 h-3 bg-shirin-blue rounded-full animate-bounce opacity-60"></div>
+        <div className="absolute bottom-12 right-1/3 w-2 h-2 bg-shirin-pink rounded-full animate-pulse opacity-70" style={{ animationDelay: '0.5s' }}></div>
+        <div className="absolute bottom-6 left-1/2 w-4 h-4 bg-shirin-purple/60 rounded-full animate-ping opacity-50" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-10 right-1/4 w-2 h-2 bg-shirin-blue rounded-full animate-bounce opacity-60" style={{ animationDelay: '1.5s' }}></div>
+        
+        {/* Wave effect */}
+        <svg className="absolute bottom-0 w-full h-16" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="headerWaveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#A1EAFB" stopOpacity="0.3" />
+              <stop offset="50%" stopColor="#CABBE9" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#FFCEF3" stopOpacity="0.3" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M0,40 C300,80 900,0 1200,40 L1200,120 L0,120 Z"
+            fill="url(#headerWaveGradient)"
+            className="animate-pulse"
+          />
+        </svg>
+      </div>
       
     </section>
   
