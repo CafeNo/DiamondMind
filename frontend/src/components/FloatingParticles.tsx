@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface Particle {
   id: number;
@@ -9,7 +9,7 @@ interface Particle {
   speedY: number;
   rotation: number;
   rotationSpeed: number;
-  type: 'heart' | 'star' | 'sparkle';
+  type: 'circle' | 'square' | 'triangle';
   opacity: number;
 }
 
@@ -18,17 +18,17 @@ const FloatingParticles = () => {
 
   useEffect(() => {
     // Create initial particles
-    const initialParticles: Particle[] = Array.from({ length: 30 }, (_, i) => ({
+    const initialParticles: Particle[] = Array.from({ length: 20 }, (_, i) => ({
       id: i,
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      size: Math.random() * 20 + 10,
-      speedX: (Math.random() - 0.5) * 0.5,
-      speedY: (Math.random() - 0.5) * 0.5,
+      size: Math.random() * 10 + 5,
+      speedX: (Math.random() - 0.5) * 0.3,
+      speedY: (Math.random() - 0.5) * 0.3,
       rotation: Math.random() * 360,
-      rotationSpeed: (Math.random() - 0.5) * 2,
-      type: ['heart', 'star', 'sparkle'][Math.floor(Math.random() * 3)] as 'heart' | 'star' | 'sparkle',
-      opacity: Math.random() * 0.5 + 0.3,
+      rotationSpeed: (Math.random() - 0.5) * 1,
+      type: ['circle', 'square', 'triangle'][Math.floor(Math.random() * 3)] as 'circle' | 'square' | 'triangle',
+      opacity: Math.random() * 0.3 + 0.1,
     }));
 
     setParticles(initialParticles);
@@ -36,19 +36,21 @@ const FloatingParticles = () => {
     // Animation loop
     const animate = () => {
       setParticles(prevParticles =>
-        prevParticles.map(particle => ({
-          ...particle,
-          x: particle.x + particle.speedX,
-          y: particle.y + particle.speedY,
-          rotation: particle.rotation + particle.rotationSpeed,
-          // Wrap around screen
-          x: particle.x > window.innerWidth + 50 ? -50 : particle.x < -50 ? window.innerWidth + 50 : particle.x,
-          y: particle.y > window.innerHeight + 50 ? -50 : particle.y < -50 ? window.innerHeight + 50 : particle.y,
-        }))
+        prevParticles.map(particle => {
+          const newX = particle.x + particle.speedX;
+          const newY = particle.y + particle.speedY;
+          
+          return {
+            ...particle,
+            x: newX > window.innerWidth + 50 ? -50 : newX < -50 ? window.innerWidth + 50 : newX,
+            y: newY > window.innerHeight + 50 ? -50 : newY < -50 ? window.innerHeight + 50 : newY,
+            rotation: particle.rotation + particle.rotationSpeed,
+          };
+        })
       );
     };
 
-    const interval = setInterval(animate, 50);
+    const interval = setInterval(animate, 100);
 
     return () => clearInterval(interval);
   }, []);
@@ -63,41 +65,41 @@ const FloatingParticles = () => {
       height: particle.size,
     };
 
+    const colors = ['bg-shirin-blue/30', 'bg-shirin-purple/30', 'bg-shirin-pink/30'];
+    const color = colors[particle.id % colors.length];
+
     switch (particle.type) {
-      case 'heart':
+      case 'circle':
         return (
           <div
             key={particle.id}
-            className="absolute pointer-events-none text-pink-400"
+            className={`absolute pointer-events-none rounded-full ${color}`}
             style={style}
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-            </svg>
-          </div>
+          />
         );
-      case 'star':
+      case 'square':
         return (
           <div
             key={particle.id}
-            className="absolute pointer-events-none text-yellow-400"
+            className={`absolute pointer-events-none ${color}`}
             style={style}
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-            </svg>
-          </div>
+          />
         );
-      case 'sparkle':
+      case 'triangle':
         return (
           <div
             key={particle.id}
-            className="absolute pointer-events-none text-cyan-400"
+            className="absolute pointer-events-none"
             style={style}
           >
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" />
-            </svg>
+            <div 
+              className={`w-0 h-0 border-l-2 border-r-2 border-b-4 border-transparent ${color.replace('bg-', 'border-b-')}`}
+              style={{ 
+                borderLeftWidth: particle.size / 2,
+                borderRightWidth: particle.size / 2,
+                borderBottomWidth: particle.size
+              }}
+            />
           </div>
         );
     }

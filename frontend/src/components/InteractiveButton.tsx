@@ -45,13 +45,13 @@ const InteractiveButton = ({
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleClick}
       >
-        {/* Sparkle effect */}
+        {/* Static sparkle effect */}
         {isHovered && (
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-2 left-2 text-yellow-300 animate-spin">✨</div>
-            <div className="absolute top-2 right-2 text-pink-300 animate-spin" style={{ animationDelay: '0.5s' }}>✨</div>
-            <div className="absolute bottom-2 left-2 text-cyan-300 animate-spin" style={{ animationDelay: '1s' }}>✨</div>
-            <div className="absolute bottom-2 right-2 text-purple-300 animate-spin" style={{ animationDelay: '1.5s' }}>✨</div>
+            <div className="absolute top-2 left-2 text-yellow-300 opacity-70">✨</div>
+            <div className="absolute top-2 right-2 text-pink-300 opacity-70">✨</div>
+            <div className="absolute bottom-2 left-2 text-cyan-300 opacity-70">✨</div>
+            <div className="absolute bottom-2 right-2 text-purple-300 opacity-70">✨</div>
           </div>
         )}
         

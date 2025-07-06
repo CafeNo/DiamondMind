@@ -35,9 +35,6 @@ const ScrollSection = ({ children, className = '', effect = 'fadeUp' }: ScrollSe
                 element.classList.add('animate-glow');
                 break;
             }
-            
-            // Add sparkle effects
-            createSparkleEffect(element);
           }
         });
       },
@@ -54,30 +51,6 @@ const ScrollSection = ({ children, className = '', effect = 'fadeUp' }: ScrollSe
     return () => observer.disconnect();
   }, [effect]);
 
-  const createSparkleEffect = (element: HTMLElement) => {
-    // Create floating sparkles when section comes into view
-    const sparkleCount = 5;
-    
-    for (let i = 0; i < sparkleCount; i++) {
-      const sparkle = document.createElement('div');
-      sparkle.className = 'absolute pointer-events-none text-shirin-blue opacity-0 animate-sparkle';
-      sparkle.innerHTML = '🌟';
-      sparkle.style.left = `${Math.random() * 100}%`;
-      sparkle.style.top = `${Math.random() * 100}%`;
-      sparkle.style.animationDelay = `${Math.random() * 2}s`;
-      sparkle.style.fontSize = `${0.8 + Math.random() * 0.4}rem`;
-      
-      element.appendChild(sparkle);
-      
-      // Remove sparkle after animation
-      setTimeout(() => {
-        if (sparkle.parentNode) {
-          sparkle.parentNode.removeChild(sparkle);
-        }
-      }, 3000);
-    }
-  };
-
   return (
     <div 
       ref={sectionRef}
@@ -92,8 +65,8 @@ const ScrollSection = ({ children, className = '', effect = 'fadeUp' }: ScrollSe
       
       {/* Ambient glow effect */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-32 h-32 bg-shirin-blue/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-40 h-40 bg-shirin-purple/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-0 left-0 w-32 h-32 bg-shirin-blue/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 w-40 h-40 bg-shirin-purple/5 rounded-full blur-3xl"></div>
       </div>
 
       {/* Custom CSS for animations */}
@@ -153,21 +126,6 @@ const ScrollSection = ({ children, className = '', effect = 'fadeUp' }: ScrollSe
           }
         }
         
-        @keyframes sparkle {
-          0% { 
-            opacity: 0; 
-            transform: translateY(0) scale(0.5); 
-          }
-          50% { 
-            opacity: 1; 
-            transform: translateY(-20px) scale(1); 
-          }
-          100% { 
-            opacity: 0; 
-            transform: translateY(-40px) scale(0.5); 
-          }
-        }
-        
         .animate-fade-up {
           animation: fade-up 1s ease-out forwards;
         }
@@ -186,10 +144,6 @@ const ScrollSection = ({ children, className = '', effect = 'fadeUp' }: ScrollSe
         
         .animate-glow {
           animation: glow 1s ease-out forwards;
-        }
-        
-        .animate-sparkle {
-          animation: sparkle 3s ease-out forwards;
         }
       `}</style>
     </div>

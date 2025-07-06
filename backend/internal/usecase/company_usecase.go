@@ -14,7 +14,7 @@ func NewCompanyUsecase() CompanyUsecase {
 
 func (u *companyUsecase) GetInfo() entity.CompanyInfo {
     return entity.CompanyInfo{
-        Name:   "My Company",
+        Name:   "Aurelia",
         Slogan: "Innovate. Inspire. Impact.",
         About:  "We create value by turning bold ideas into tangible digital experiences.",
     }

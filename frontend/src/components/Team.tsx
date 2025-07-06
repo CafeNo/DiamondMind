@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import InteractiveButton from './InteractiveButton';
 
 const Team = () => {
@@ -82,11 +82,11 @@ const Team = () => {
           <h2 className="text-7xl font-semibold bg-gradient-to-r from-shirin-blue to-shirin-purple bg-clip-text text-transparent mb-4">
             Meet the Team! 🎉
           </h2>
-          {/* Floating team emojis */}
+          {/* Static team emojis */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 left-1/4 text-shirin-pink animate-bounce">👥</div>
-            <div className="absolute top-2 right-1/4 text-shirin-blue animate-bounce" style={{ animationDelay: '0.5s' }}>💫</div>
-            <div className="absolute -top-2 left-1/2 text-shirin-purple animate-bounce" style={{ animationDelay: '1s' }}>🌟</div>
+            <div className="absolute top-0 left-1/4 text-shirin-pink opacity-60">👥</div>
+            <div className="absolute top-2 right-1/4 text-shirin-blue opacity-60">💫</div>
+            <div className="absolute -top-2 left-1/2 text-shirin-purple opacity-60">🌟</div>
           </div>
         </div>
         
@@ -110,7 +110,7 @@ const Team = () => {
               <div className={`bg-gradient-to-br ${member.color} p-1 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300`}>
                 <div className="bg-white rounded-xl p-6 h-full">
                   {/* Member emoji */}
-                  <div className="text-6xl mb-4 animate-bounce">{member.emoji}</div>
+                  <div className="text-6xl mb-4">{member.emoji}</div>
                   
                   {/* Member info */}
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">{member.name}</h3>
@@ -124,12 +124,12 @@ const Team = () => {
                     <p className="text-sm text-gray-600 italic">💡 {member.funFact}</p>
                   </div>
                   
-                  {/* Hover sparkles */}
-                  <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute top-2 left-2 text-yellow-300 animate-spin text-sm">✨</div>
-                    <div className="absolute top-2 right-2 text-pink-300 animate-spin text-sm" style={{ animationDelay: '0.5s' }}></div>
-                    <div className="absolute bottom-2 left-2 text-cyan-300 animate-spin text-sm" style={{ animationDelay: '1s' }}>⭐</div>
-                    <div className="absolute bottom-2 right-2 text-purple-300 animate-spin text-sm" style={{ animationDelay: '1.5s' }}>🎉</div>
+                  {/* Static hover effects */}
+                  <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-50 transition-opacity duration-300">
+                    <div className="absolute top-2 left-2 text-yellow-300 text-sm">✨</div>
+                    <div className="absolute top-2 right-2 text-pink-300 text-sm">💫</div>
+                    <div className="absolute bottom-2 left-2 text-cyan-300 text-sm">⭐</div>
+                    <div className="absolute bottom-2 right-2 text-purple-300 text-sm">🎉</div>
                   </div>
                 </div>
               </div>

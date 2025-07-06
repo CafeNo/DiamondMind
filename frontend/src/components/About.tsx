@@ -20,39 +20,39 @@ const About = () => {
           <h2 className="text-7xl font-semibold mb-10 bg-gradient-to-r from-shirin-blue to-shirin-purple bg-clip-text text-transparent hover:scale-105 transition-transform duration-300 cursor-pointer interactive">
           About Aurelia
           </h2>
-          {/* Floating sparkles around the title */}
+          {/* Static sparkles around the title */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 left-1/4 text-shirin-pink animate-bounce">⭐</div>
-            <div className="absolute top-2 right-1/4 text-shirin-blue animate-bounce" style={{ animationDelay: '0.5s' }}></div>
-            <div className="absolute -top-2 left-1/2 text-shirin-purple animate-bounce" style={{ animationDelay: '1s' }}>✨</div>
+            <div className="absolute top-0 left-1/4 text-shirin-pink opacity-60"></div>
+            <div className="absolute top-2 right-1/4 text-shirin-blue opacity-60"></div>
+            <div className="absolute -top-2 left-1/2 text-shirin-purple opacity-60"></div>
           </div>
         </div>
 
         <div className="space-y-6 mb-10">
           <p className="text-2xl font-semibold text-gray-800 leading-relaxed">
-            Welcome to the magical world of <span className="text-shirin-blue font-bold">Aurelia</span>! 🌟
+            Welcome to the magical world of <span className="text-shirin-blue font-bold">Aurelia</span>!
           </p>
 
           <p className="text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
             I'm your friendly neighborhood VTuber who loves to bring joy, laughter, and a sprinkle of magic to every stream! 
-            From gaming adventures to cozy chat sessions, there's always something fun happening here! 🎮✨
+            From gaming adventures to cozy chat sessions, there's always something fun happening here!
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 interactive">
-              <div className="text-4xl mb-4">🎮</div>
+              <div className="text-4xl mb-4"></div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Gaming</h3>
               <p className="text-gray-600">From indie gems to AAA titles, let's explore amazing worlds together!</p>
             </div>
             
             <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 interactive">
-              <div className="text-4xl mb-4">💬</div>
+              <div className="text-4xl mb-4"></div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Community</h3>
               <p className="text-gray-600">Join our amazing community of friends and make lasting memories!</p>
             </div>
             
             <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 interactive">
-              <div className="text-4xl mb-4">🎵</div>
+              <div className="text-4xl mb-4"></div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Music</h3>
               <p className="text-gray-600">Singing, karaoke, and musical adventures await!</p>
             </div>
@@ -78,7 +78,7 @@ const About = () => {
             variant="primary"
             onClick={() => alert("Thanks for the love! ")}
           >
-            Follow Me! ✨
+            Follow Me!
           </InteractiveButton>
           
           <InteractiveButton 
@@ -99,9 +99,9 @@ const About = () => {
         {/* Secret message */}
         {showSecret && (
           <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
-            <div className="bg-gradient-to-r from-shirin-blue to-shirin-purple text-white p-8 rounded-2xl shadow-2xl animate-bounce">
-              <h3 className="text-2xl font-bold mb-2">🎉 You found the secret! 🎉</h3>
-              <p className="text-lg">You're officially part of the Aurelia fan club! ✨</p>
+            <div className="bg-gradient-to-r from-shirin-blue to-shirin-purple text-white p-8 rounded-2xl shadow-2xl">
+              <h3 className="text-2xl font-bold mb-2">You found the secret!</h3>
+              <p className="text-lg">You're officially part of the Aurelia fan club!</p>
             </div>
           </div>
         )}

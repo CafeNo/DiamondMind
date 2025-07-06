@@ -6,7 +6,25 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
+
+body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+}
+
+
+/* Performance optimizations for animations */
+
+
+/* 
+[data-parallax-layers] {
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+} */
 
 
 /* Enhanced scrolling for Webkit browsers */

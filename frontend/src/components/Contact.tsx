@@ -26,7 +26,7 @@ const Contact = () => {
           className="py-3 rounded bg-gradient-to-r from-shirin-blue to-shirin-purple text-white font-semibold hover:scale-105 transform transition-all duration-300"
           type="submit"
         >
-          Send ✨
+          Send
         </button>
       </form>
       {showAlert && (

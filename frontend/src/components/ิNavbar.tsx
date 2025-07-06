@@ -71,6 +71,8 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [updateBubblePosition]);
 
+
+
   const handleNavClick = (itemId: string, href: string) => {
     setActiveItem(itemId);
     
@@ -90,7 +92,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-shirin-blue/80 to-shirin-red/100 border-gray-200 dark:bg-gray-900/80 dark:bg-opacity-20 sticky top-0 opacity-95 backdrop-blur-md z-[100] shadow-lg">
+    <nav 
+      className="sticky top-0 w-full bg-gradient-to-r from-shirin-blue/80 to-shirin-red/100 border-gray-200 dark:bg-gray-900/80 dark:bg-opacity-20 opacity-95 backdrop-blur-md z-[999] shadow-lg"
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 999,
+      }}
+    >
       <div className="max-w-screen-xl mx-auto flex items-center justify-center p-4">
         <div className="relative">
           {/* Animated Bubble Background */}
@@ -122,10 +131,10 @@ const Navbar = () => {
                 }`}
               >
                 {item.label}
-                {/* Sparkle effect on hover */}
-                <div className="absolute inset-0 pointer-events-none opacity-0 hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute -top-1 -left-1 text-shirin-pink text-xs animate-spin"></div>
-                  <div className="absolute -top-1 -right-1 text-shirin-blue text-xs animate-spin" style={{ animationDelay: '0.5s' }}></div>
+                {/* Static sparkle effect on hover */}
+                <div className="absolute inset-0 pointer-events-none opacity-0 hover:opacity-30 transition-opacity duration-300">
+                  <div className="absolute -top-1 -left-1 text-shirin-pink text-xs"></div>
+                  <div className="absolute -top-1 -right-1 text-shirin-blue text-xs"></div>
                 </div>
               </a>
             </li>
@@ -133,12 +142,12 @@ const Navbar = () => {
           </ul>
         </div>
         
-        {/* Fun floating elements */}
+        {/* Static floating elements */}
         <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-          <div className="text-shirin-blue animate-bounce text-2xl"></div>
+          <div className="text-shirin-blue opacity-50 text-2xl"></div>
         </div>
         <div className="absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-          <div className="text-shirin-purple animate-bounce text-2xl" style={{ animationDelay: '0.2s' }}></div>
+          <div className="text-shirin-purple opacity-50 text-2xl"></div>
         </div>
       </div>
     </nav>

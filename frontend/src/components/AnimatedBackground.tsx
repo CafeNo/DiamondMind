@@ -31,10 +31,10 @@ const AnimatedBackground = () => {
         }}
       />
       
-      {/* Floating orbs */}
-      <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-r from-shirin-blue to-shirin-purple rounded-full opacity-20 animate-bounce blur-xl"></div>
-      <div className="absolute top-3/4 right-1/4 w-24 h-24 bg-gradient-to-r from-shirin-purple to-shirin-pink rounded-full opacity-20 animate-bounce blur-xl" style={{ animationDelay: '1s' }}></div>
-      <div className="absolute bottom-1/4 left-1/3 w-20 h-20 bg-gradient-to-r from-shirin-pink to-shirin-blue rounded-full opacity-20 animate-bounce blur-xl" style={{ animationDelay: '2s' }}></div>
+      {/* Static orbs */}
+      <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-r from-shirin-blue to-shirin-purple rounded-full opacity-10 blur-xl"></div>
+      <div className="absolute top-3/4 right-1/4 w-24 h-24 bg-gradient-to-r from-shirin-purple to-shirin-pink rounded-full opacity-10 blur-xl"></div>
+      <div className="absolute bottom-1/4 left-1/3 w-20 h-20 bg-gradient-to-r from-shirin-pink to-shirin-blue rounded-full opacity-10 blur-xl"></div>
       
       {/* Animated grid pattern */}
       <div className="absolute inset-0 opacity-10">
