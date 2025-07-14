@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface Particle {
   id: number;
@@ -9,7 +9,7 @@ interface Particle {
   speedY: number;
   rotation: number;
   rotationSpeed: number;
-  type: 'heart' | 'star' | 'sparkle';
+  type: "heart" | "star" | "sparkle";
   opacity: number;
 }
 
@@ -27,7 +27,10 @@ const FloatingParticles = () => {
       speedY: (Math.random() - 0.5) * 0.5,
       rotation: Math.random() * 360,
       rotationSpeed: (Math.random() - 0.5) * 2,
-      type: ['heart', 'star', 'sparkle'][Math.floor(Math.random() * 3)] as 'heart' | 'star' | 'sparkle',
+      type: ["heart", "star", "sparkle"][Math.floor(Math.random() * 3)] as
+        | "heart"
+        | "star"
+        | "sparkle",
       opacity: Math.random() * 0.5 + 0.3,
     }));
 
@@ -35,16 +38,28 @@ const FloatingParticles = () => {
 
     // Animation loop
     const animate = () => {
-      setParticles(prevParticles =>
-        prevParticles.map(particle => ({
-          ...particle,
-          x: particle.x + particle.speedX,
-          y: particle.y + particle.speedY,
-          rotation: particle.rotation + particle.rotationSpeed,
-          // Wrap around screen
-          x: particle.x > window.innerWidth + 50 ? -50 : particle.x < -50 ? window.innerWidth + 50 : particle.x,
-          y: particle.y > window.innerHeight + 50 ? -50 : particle.y < -50 ? window.innerHeight + 50 : particle.y,
-        }))
+      setParticles((prevParticles) =>
+        prevParticles.map((particle) => {
+          const newX = particle.x + particle.speedX;
+          const newY = particle.y + particle.speedY;
+
+          return {
+            ...particle,
+            x:
+              newX > window.innerWidth + 50
+                ? -50
+                : newX < -50
+                ? window.innerWidth + 50
+                : newX,
+            y:
+              newY > window.innerHeight + 50
+                ? -50
+                : newY < -50
+                ? window.innerHeight + 50
+                : newY,
+            rotation: particle.rotation + particle.rotationSpeed,
+          };
+        })
       );
     };
 
@@ -64,7 +79,7 @@ const FloatingParticles = () => {
     };
 
     switch (particle.type) {
-      case 'heart':
+      case "heart":
         return (
           <div
             key={particle.id}
@@ -76,7 +91,7 @@ const FloatingParticles = () => {
             </svg>
           </div>
         );
-      case 'star':
+      case "star":
         return (
           <div
             key={particle.id}
@@ -88,7 +103,7 @@ const FloatingParticles = () => {
             </svg>
           </div>
         );
-      case 'sparkle':
+      case "sparkle":
         return (
           <div
             key={particle.id}
@@ -110,4 +125,4 @@ const FloatingParticles = () => {
   );
 };
 
-export default FloatingParticles; 
+export default FloatingParticles;

@@ -4,11 +4,7 @@ import CompanyInfo from "./components/CompanyInfo";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import About from "./components/About";
-<<<<<<< HEAD
-import Navbar from "./components/Navbar";
-=======
-import Navbar from "./components/ิNavbar";
->>>>>>> 3178cea5559fdcf69a5634e32b5c781701f9aa62
+import Navbar from "./components/Navbar";  // แก้ตรงนี้
 import Team from "./components/Team";
 import FloatingParticles from "./components/FloatingParticles";
 import InteractiveCursor from "./components/InteractiveCursor";
@@ -31,14 +27,6 @@ function App() {
 
   return (
     <>
-<<<<<<< HEAD
-      <Header />
-      <Navbar />
-      <CompanyInfo />
-      <About />
-      <Team />
-      <Contact />
-=======
       {/* Background and interactive effects */}
       <AnimatedBackground />
       <FloatingParticles />
@@ -58,19 +46,10 @@ function App() {
       
       <Navbar />
       
-      <SectionDivider variant="geometric" height="md" />
-      
-      <ScrollSection effect="slideLeft">
-        <CompanyInfo />
-      </ScrollSection>
-      
-      <SectionDivider variant="particles" height="md" />
       
       <ScrollSection effect="scale">
         <About />
-      </ScrollSection>
-      
-      <SectionDivider variant="gradient" height="lg" />
+      </ScrollSection>  
       
       <ScrollSection effect="slideRight">
         <Team />
@@ -84,7 +63,6 @@ function App() {
       
       {/* Final decorative divider */}
       <SectionDivider variant="geometric" height="sm" />
->>>>>>> 3178cea5559fdcf69a5634e32b5c781701f9aa62
     </>
   );
 }

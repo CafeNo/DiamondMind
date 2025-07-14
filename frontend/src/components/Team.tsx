@@ -76,7 +76,7 @@ const Team = () => {
   };
 
   return (
-    <section id="team" className="min-h-[50vh] flex flex-col items-center overflow-hidden px-4 py-16 bg-gradient-to-br from-shirin-blue/20 to-shirin-purple/20">
+    <section id="team" className="min-h-[50vh] flex flex-col items-center overflow-hidden px-4 py-16 bg-gradient-to-br from-shirin-purple/20 to-shirin-blue/20">
       <div className="text-center max-w-5xl">
         <div className="relative">
           <h2 className="text-7xl font-semibold bg-gradient-to-r from-shirin-blue to-shirin-purple bg-clip-text text-transparent mb-4">
