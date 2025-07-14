@@ -1,12 +1,16 @@
 import React, { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 import MagicalEffects from "./MagicalEffects";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Header = () => {
   useEffect(() => {
+    // Always scroll to top on page load/refresh
+    window.scrollTo({ top: 0, behavior: 'auto' });
+
     const trigger = document.querySelector("[data-parallax-layers]") as HTMLElement;
     if (!trigger) return;
 
@@ -40,30 +44,94 @@ const Header = () => {
 
   return (
 
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 h-[120%] w-full" data-parallax-layers>
+    <section id="home" className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 h-[120%] w-full overflow-hidden" data-parallax-layers>
+        
+        {/* Starry Background Effect - Above background layer */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-[2]">
+          {/* Twinkling Stars */}
+          {Array.from({ length: 60 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute bg-white rounded-full"
+              style={{
+                width: Math.random() * 3 + 1 + 'px',
+                height: Math.random() * 3 + 1 + 'px',
+                left: Math.random() * 100 + '%',
+                top: Math.random() * 100 + '%',
+                opacity: Math.random() * 0.8 + 0.2,
+                willChange: 'opacity, transform',
+                transform: 'translate3d(0, 0, 0)',
+              }}
+              animate={{
+                opacity: [0.2, 1, 0.2],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: Math.random() * 2 + 2,
+                repeat: Infinity,
+                ease: "linear",
+                delay: Math.random() * 2,
+              }}
+            />
+          ))}
+          
+
+          
+          {/* Ethereal Clouds */}
+          {Array.from({ length: 15 }).map((_, i) => (
+            <motion.div
+              key={`header-cloud-${i}`}
+              className="absolute opacity-5"
+              style={{
+                left: Math.random() * 100 + '%',
+                top: Math.random() * 100 + '%',
+                width: Math.random() * 200 + 100 + 'px',
+                height: Math.random() * 200 + 100 + 'px',
+                background: 'radial-gradient(ellipse, rgba(255,255,255,0.2) 0%, transparent 70%)',
+                borderRadius: '70%',
+                willChange: 'transform, opacity',
+                transform: 'translate3d(0, 0, 0)',
+              }}
+              animate={{
+                x: [0, 20, 0],
+                y: [0, -10, 0],
+                opacity: [0.02, 0.08, 0.02],
+              }}
+              transition={{
+                duration: Math.random() * 20 + 20,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+          ))}
+        </div>
+        
         {/* Layer 1: Aurelia Background (parallax moving layer) with zoom */}
         <img
           data-parallax-layer="1"
           src="/aurelia_bg.png"
-          className="absolute w-full h-full top-0 object-cover pointer-events-none z-[1] transform scale-110 hover:scale-115 transition-transform duration-[3s] ease-out"
+          className="absolute w-full h-full top-[-10%] object-cover pointer-events-none z-[1] transform scale-110 hover:scale-115 transition-transform duration-[3s] ease-out will-change-transform"
           alt="Aurelia Background"
+          style={{ transform: 'translate3d(0, 0, 0)' }}
         />
         
         {/* Layer 2: Aurelia Logo (parallax moving layer) */}
         <img
           data-parallax-layer="2"
           src="/aurelia_logo.png"
-          className="absolute w-full h-auto top-[-10%] left-1/2 transform -translate-x-1/2 object-contain pointer-events-none z-[2]"
+          className="absolute w-full h-auto top-[-10%] left-1/2 transform -translate-x-1/2 object-contain pointer-events-none z-[2] will-change-transform"
           alt="Aurelia Logo"
+          style={{ transform: 'translate3d(-50%, 0, 0)' }}
         />
 
         {/* Layer 3: Aurelia Characters (on top of logo) */}
         <img 
           data-parallax-layer="3"
           src="/aurelia_charactors.png"
-          className="absolute w-3/4 h-auto top-[0%] left-1/2 transform -translate-x-1/2 object-contain pointer-events-none z-[3]"
+          className="absolute w-3/4 h-auto top-[10%] left-1/2 transform -translate-x-1/2 object-contain pointer-events-none z-[3] will-change-transform"
           alt="Aurelia Characters"
+          style={{ transform: 'translate3d(-50%, 0, 0)' }}
         />
         
 
@@ -81,12 +149,6 @@ const Header = () => {
         
         {/* Shirin blue overlay effect */}
         <div className="absolute inset-0 bg-gradient-to-t from-shirin-blue/20 via-shirin-purple/10 to-transparent"></div>
-        
-        {/* Floating sparkles */}
-        <div className="absolute bottom-8 left-1/4 w-3 h-3 bg-shirin-blue rounded-full animate-bounce opacity-60"></div>
-        <div className="absolute bottom-12 right-1/3 w-2 h-2 bg-shirin-pink rounded-full animate-pulse opacity-70" style={{ animationDelay: '0.5s' }}></div>
-        <div className="absolute bottom-6 left-1/2 w-4 h-4 bg-shirin-purple/60 rounded-full animate-ping opacity-50" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-10 right-1/4 w-2 h-2 bg-shirin-blue rounded-full animate-bounce opacity-60" style={{ animationDelay: '1.5s' }}></div>
         
         {/* Wave effect */}
         <svg className="absolute bottom-0 w-full h-16" viewBox="0 0 1200 120" preserveAspectRatio="none">

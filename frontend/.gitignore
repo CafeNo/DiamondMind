@@ -1,0 +1,5 @@
+# Local frontend-specific ignores (root .gitignore handles most cases)
+.env.local
+.vite/
+
+node_modules

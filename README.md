@@ -4,12 +4,61 @@
 
 DiamondMind is a modern, interactive website dedicated to the VTuber character **Aurelia**. This project features an elegant blue-themed design inspired by Shirin Ch., complete with magical animations, parallax scrolling effects, and a responsive user interface.
 
+## Quick Start
+
+### Prerequisites
+- **Node.js** 18.0.0+ 
+- **Go** 1.21+
+- **Git**
+
+### Installation
+```bash
+# Clone repository
+git clone <repository-url>
+cd DiamondMind
+
+# Frontend setup
+cd frontend
+npm install
+npm run dev
+
+# Backend setup (new terminal)
+cd backend
+go mod tidy
+go run cmd/server/main.go
+```
+
+**Frontend**: http://localhost:5173  
+**Backend**: http://localhost:8080
+
+## Documentation
+
+### Requirements & Dependencies
+- **[REQUIREMENTS.md](./REQUIREMENTS.md)** - Complete project requirements and setup guide
+- **[Frontend Requirements](./frontend/requirements.frontend.md)** - Frontend-specific dependencies
+- **[Backend Requirements](./backend/requirements.go.md)** - Go backend dependencies
+
+### Project Structure
+```
+DiamondMind/
+├── frontend/                 # React frontend application
+│   ├── src/components/      # Reusable UI components
+│   ├── public/              # Static assets
+│   └── requirements.frontend.md
+├── backend/                 # Go backend application
+│   ├── cmd/server/         # Application entry point
+│   ├── internal/           # Internal application code
+│   └── requirements.go.md
+├── .gitignore              # Git ignore rules
+├── REQUIREMENTS.md         # Detailed requirements
+└── README.md               # This file
+```
+
 ## Features
 
 ### Visual Design
 - **Shirin Ch. Inspired Theme**: Beautiful blue color palette (#A1EAFB, #CABBE9, #FFCEF3, #F19192)
 - **Parallax Scrolling**: Smooth layered animations that respond to user scroll
-- **Magical Effects**: Floating particles, sparkles, hearts, and glitter animations
 - **Interactive Elements**: Hover effects, animated buttons, and smooth transitions
 - **Responsive Layout**: Optimized for desktop, tablet, and mobile devices
 
@@ -24,128 +73,19 @@ DiamondMind is a modern, interactive website dedicated to the VTuber character *
 ## Technology Stack
 
 ### Frontend
-- **React 18.3.1**: Modern JavaScript library for building user interfaces
-- **TypeScript**: Type-safe JavaScript for better development experience
-- **Tailwind CSS**: Utility-first CSS framework for rapid styling
-- **Vite**: Fast build tool and development server
-- **GSAP**: Professional animation library for smooth effects
-- **Lenis**: Smooth scrolling library for enhanced navigation
+- **React 18.3.1** with TypeScript
+- **Vite** for fast development
+- **Tailwind CSS** for styling
+- **GSAP & Framer Motion** for animations
+- **Lenis** for smooth scrolling
 
 ### Backend
-- **Go 1.21**: High-performance programming language
-- **Chi Router**: Lightweight HTTP router for Go applications
+- **Go 1.21** with Chi router
+- **Clean Architecture** pattern
 
-## Project Structure
-
-```
-DiamondMind/
-├── frontend/                 # React frontend application
-│   ├── src/
-│   │   ├── components/      # Reusable UI components
-│   │   │   ├── Header.tsx   # Main header with parallax
-│   │   │   ├── Navbar.tsx   # Navigation with animations
-│   │   │   ├── About.tsx    # About section content
-│   │   │   ├── Team.tsx     # Team showcase
-│   │   │   ├── Contact.tsx  # Contact information
-│   │   │   └── ...          # Additional components
-│   │   ├── App.tsx          # Main application component
-│   │   └── main.tsx         # Application entry point
-│   ├── public/              # Static assets
-│   │   ├── aurelia_bg.png   # Background image
-│   │   ├── aurelia_logo.png # Logo image
-│   │   └── aurelia_charactors.png # Character image
-│   └── package.json         # Frontend dependencies
-├── backend/                 # Go backend application
-│   ├── cmd/server/         # Application entry point
-│   ├── internal/           # Internal application code
-│   └── go.mod              # Backend dependencies
-└── README.md               # Project documentation
-```
-
-## Installation Guide
-
-### Prerequisites
-
-Before starting, ensure you have the following software installed:
-
-1. **Node.js** (version 18 or higher)
-   - Download from: https://nodejs.org/
-   - Verify installation: `node --version`
-
-2. **Go** (version 1.21 or higher)
-   - Download from: https://golang.org/dl/
-   - Verify installation: `go version`
-
-3. **Git** (for version control)
-   - Download from: https://git-scm.com/
-   - Verify installation: `git --version`
-
-### Setup Instructions
-
-#### 1. Clone the Repository
-```bash
-git clone <repository-url>
-cd DiamondMind
-```
-
-#### 2. Frontend Setup
-```bash
-# Navigate to frontend directory
-cd frontend
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-```
-
-The frontend application will be available at: `http://localhost:5173`
-
-#### 3. Backend Setup
-```bash
-# Navigate to backend directory (from project root)
-cd backend
-
-# Download Go dependencies
-go mod tidy
-
-# Run the server
-go run cmd/server/main.go
-```
-
-The backend server will be available at: `http://localhost:8080`
-
-## Development Workflow
-
-### Frontend Development
-- **Development Mode**: `npm run dev` - Starts development server with hot reload
-- **Build Production**: `npm run build` - Creates optimized production build
-- **Preview Build**: `npm run preview` - Preview production build locally
-
-### Backend Development
-- **Run Server**: `go run cmd/server/main.go` - Starts the Go server
-- **Test Application**: `go test ./...` - Run all tests
-- **Build Binary**: `go build -o server cmd/server/main.go` - Create executable
-
-### File Organization
-
-#### Adding New Components
-1. Create new `.tsx` file in `frontend/src/components/`
-2. Export component as default
-3. Import and use in parent components
-4. Follow TypeScript best practices
-
-#### Styling Guidelines
-- Use Tailwind CSS utility classes
-- Follow Shirin theme colors: `shirin-blue`, `shirin-purple`, `shirin-pink`, `shirin-red`
-- Maintain responsive design principles
-- Test across different screen sizes
-
-## Configuration
+## Design System
 
 ### Color Theme (Tailwind Configuration)
-The project uses custom colors defined in `tailwind.config.js`:
 ```javascript
 colors: {
   'shirin-blue': '#A1EAFB',    // Primary blue
@@ -156,74 +96,88 @@ colors: {
 }
 ```
 
-### Animation Settings
-- **Parallax Speed**: Configured in `Header.tsx` layer settings
-- **Scroll Triggers**: GSAP ScrollTrigger configuration
-- **Magical Effects**: Particle counts and animation durations
+## Development
+
+### Frontend Scripts
+```bash
+npm run dev      # Development server
+npm run build    # Production build
+npm run preview  # Preview build
+```
+
+### Backend Scripts
+```bash
+go run cmd/server/main.go    # Run server
+go test ./...                # Run tests
+go build -o bin/server cmd/server/main.go  # Build binary
+```
+
+## Configuration
+
+### Environment Variables
+
+**Frontend** (`.env` in `frontend/`):
+```env
+VITE_API_URL=http://localhost:8080
+VITE_APP_NAME=DiamondMind
+```
+
+**Backend** (`.env` in `backend/`):
+```env
+PORT=8080
+CORS_ORIGIN=http://localhost:5173
+```
 
 ## Troubleshooting
 
 ### Common Issues
 
-#### Frontend Issues
-**Problem**: `npm install` fails
-- **Solution**: Clear npm cache with `npm cache clean --force`
-- **Alternative**: Delete `node_modules` and `package-lock.json`, then reinstall
+**Frontend Issues**:
+- `npm install` fails → Clear cache: `npm cache clean --force`
+- Port 5173 busy → Use: `npm run dev -- --port 3000`
 
-**Problem**: Development server won't start
-- **Solution**: Check if port 5173 is available
-- **Alternative**: Use `npm run dev -- --port 3000` for different port
+**Backend Issues**:
+- Go modules error → Run: `go mod download`
+- Port 8080 busy → Change PORT in environment
 
-#### Backend Issues
-**Problem**: Go modules not downloading
-- **Solution**: Run `go mod download` explicitly
-- **Check**: Ensure Go version is 1.21 or higher
-
-**Problem**: Server startup errors
-- **Solution**: Check if port 8080 is available
-- **Verify**: Go module path and dependencies
-
-### Performance Optimization
-- **Images**: Optimize PNG files for web delivery
-- **Animations**: Reduce particle counts for slower devices
-- **Bundle Size**: Use `npm run build` and analyze output
+### Performance Tips
+- Optimize images for web delivery
+- Reduce animation complexity on slower devices
+- Use `npm run build` to analyze bundle size
 
 ## Contributing
 
-### Code Standards
-1. **TypeScript**: Use proper type definitions
-2. **Formatting**: Follow project code style
-3. **Comments**: Document complex functionality
-4. **Testing**: Add tests for new features
-
-### Pull Request Process
 1. Fork the repository
 2. Create feature branch: `git checkout -b feature-name`
-3. Make changes and commit: `git commit -m "Description"`
-4. Push branch: `git push origin feature-name`
-5. Create pull request with detailed description
+3. Make changes and test thoroughly
+4. Submit pull request with detailed description
+
+### Code Standards
+- Use TypeScript for type safety
+- Follow project formatting guidelines
+- Add comments for complex functionality
+- Write tests for new features
 
 ## Support
 
-### Documentation Resources
-- **React**: https://react.dev/
-- **TypeScript**: https://www.typescriptlang.org/docs/
-- **Tailwind CSS**: https://tailwindcss.com/docs
-- **GSAP**: https://greensock.com/docs/
-- **Go**: https://golang.org/doc/
+### Resources
+- [React Documentation](https://react.dev/)
+- [TypeScript Docs](https://www.typescriptlang.org/docs/)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [GSAP Documentation](https://greensock.com/docs/)
+- [Go Documentation](https://golang.org/doc/)
 
 ### Getting Help
 - Check existing issues in the repository
-- Create new issue with detailed problem description
+- Create detailed issue with reproduction steps
 - Include system information and error messages
-- Provide steps to reproduce the issue
 
 ## License
 
-This project is created only for Aurelia Project.
+This project is created exclusively for the Aurelia Project.
 
 ---
 
-**Version**: 1.0.0  
+**Version**: v0.2.1 
 **Last Updated**: December 2024  
-**Compatibility**: Node.js 18+, Go 1.21+ 
+**Compatibility**: Node.js 18+, Go 1.21+

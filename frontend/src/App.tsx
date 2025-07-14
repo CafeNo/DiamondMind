@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import CompanyInfo from "./components/CompanyInfo";
 import Services from "./components/Services";
@@ -6,6 +6,8 @@ import Contact from "./components/Contact";
 import About from "./components/About";
 import Navbar from "./components/Navbar";  // แก้ตรงนี้
 import Team from "./components/Team";
+import TechStack from "./components/TechStack";
+import Footer from "./components/Footer";
 import FloatingParticles from "./components/FloatingParticles";
 import InteractiveCursor from "./components/InteractiveCursor";
 import ConfettiCelebration from "./components/ConfettiCelebration";
@@ -30,21 +32,22 @@ function App() {
       {/* Background and interactive effects */}
       <AnimatedBackground />
       <FloatingParticles />
-      <InteractiveCursor />
+      {/* <InteractiveCursor /> */}
       <ConfettiCelebration trigger={confettiTrigger} />
       
       {/* Global magical effects layer - positioned between sections only */}
       <div className="fixed bottom-0 left-0 w-full h-16 pointer-events-none z-0">
         <MagicalEffects variant="minimal" intensity="low" />
       </div>
-      
-      {/* Main content */}
-      <Header />
-      
-      {/* Beautiful section dividers between components */}
-      <SectionDivider variant="wave" height="lg" />
-      
-      <Navbar />
+             
+       {/* Main content */}
+       <Header />
+       
+       {/* Sticky Navbar - appears immediately after header */}
+       <Navbar />
+       
+       {/* Beautiful section dividers between components */}
+       <SectionDivider variant="wave" height="lg" />
       
       
       <ScrollSection effect="scale">
@@ -58,11 +61,18 @@ function App() {
       <SectionDivider variant="wave" height="md" />
       
       <ScrollSection effect="glow">
+        <TechStack />
+      </ScrollSection>
+      
+      <SectionDivider variant="geometric" height="md" />
+      
+      <ScrollSection effect="slideUp">
         <Contact />
       </ScrollSection>
       
-      {/* Final decorative divider */}
-      <SectionDivider variant="geometric" height="sm" />
+      <SectionDivider variant="gradient" height="sm" />
+      
+      <Footer />
     </>
   );
 }
