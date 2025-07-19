@@ -7,48 +7,43 @@ const Team = () => {
   const teamMembers = [
     {
       id: 1,
-      name: "Aurelia ✨",
+      name: "Aurelia ",
       role: "Main VTuber",
       description: "The magical girl who brings joy and laughter to every stream!",
       emoji: "🌟",
-      color: "from-pink-400 to-purple-500",
-      funFact: "Loves collecting cute plushies and singing karaoke! 🎤"
+      funFact: "Loves collecting cute plushies and singing karaoke! "
     },
     {
       id: 2,
-      name: "Luna 🌙",
+      name: "Luna ",
       role: "Gaming Partner",
       description: "The night owl who's always ready for epic gaming adventures!",
       emoji: "🎮",
-      color: "from-blue-400 to-cyan-500",
-      funFact: "Can speedrun any game while doing a handstand! 🤸‍♀️"
+      funFact: "Can speedrun any game while doing a handstand! "
     },
     {
       id: 3,
-      name: "Stella ⭐",
+      name: "Stella ",
       role: "Community Manager",
       description: "The friendly face who keeps our community amazing and organized!",
       emoji: "💖",
-      color: "from-yellow-400 to-orange-500",
-      funFact: "Has a secret talent for making the perfect cup of tea! ☕"
+      funFact: "Has a secret talent for making the perfect cup of tea! "
     },
     {
       id: 4,
-      name: "Nova 🚀",
+      name: "Nova ",
       role: "Tech Support",
       description: "The genius who makes sure everything runs smoothly behind the scenes!",
       emoji: "⚡",
-      color: "from-green-400 to-teal-500",
-      funFact: "Can fix any computer problem with just a gentle pat! 💻"
+      funFact: "Can fix any computer problem with just a gentle pat! "
     },
     {
       id: 5,
-      name: "Mira 🌈",
+      name: "Mira ",
       role: "Creative Director",
       description: "The artistic soul who brings our wildest dreams to life!",
       emoji: "🎨",
-      color: "from-purple-400 to-pink-500",
-      funFact: "Paints masterpieces while doing a handstand! 🎭"
+      funFact: "Paints masterpieces while doing a handstand! "
     }
   ];
 
@@ -80,14 +75,8 @@ const Team = () => {
       <div className="text-center max-w-5xl">
         <div className="relative">
           <h2 className="text-7xl font-semibold bg-gradient-to-r from-shirin-blue to-shirin-purple bg-clip-text text-transparent mb-4">
-            Meet the Team! 🎉
+            Meet the Team! 
           </h2>
-          {/* Static team emojis */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 left-1/4 text-shirin-pink opacity-60">👥</div>
-            <div className="absolute top-2 right-1/4 text-shirin-blue opacity-60">💫</div>
-            <div className="absolute -top-2 left-1/2 text-shirin-purple opacity-60">🌟</div>
-          </div>
         </div>
         
         <p className="text-2xl mt-10 w-3/4 mx-auto text-gray-700 leading-relaxed">
@@ -102,12 +91,28 @@ const Team = () => {
             <div
               key={member.id}
               className={`relative group cursor-pointer transform transition-all duration-300 hover:scale-105 interactive ${
-                selectedMember === member.id ? 'scale-110' : ''
+                selectedMember === member.id
               }`}
               onClick={() => handleMemberClick(member.id)}
             >
               {/* Card background */}
-              <div className={`bg-gradient-to-br ${member.color} p-1 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300`}>
+              <div
+                className={`
+                  bg-gradient-to-br from-shirin-blue/90 via-shirin-purple/80 to-shirin-red/90
+                  border-2 border-shirin-blue/30
+                  p-1.5 rounded-3xl
+                  shadow-xl hover:shadow-2xl
+                  transition-all duration-300
+                  group-hover:ring-4 group-hover:ring-shirin-pink/20
+                  ${selectedMember === member.id ? 'ring-4 ring-shirin-blue/40' : ''}
+                `}
+                style={{
+                  boxShadow: selectedMember === member.id
+                    ? '0 8px 32px 0 rgba(161,234,251,0.25), 0 1.5px 8px 0 rgba(255,206,243,0.12)'
+                    : undefined,
+                  transition: 'box-shadow 0.3s, transform 0.3s',
+                }}
+              >
                 <div className="bg-white rounded-xl p-6 h-full">
                   {/* Member emoji */}
                   <div className="text-6xl mb-4">{member.emoji}</div>
@@ -121,40 +126,13 @@ const Team = () => {
                   <div className={`transition-all duration-300 ${
                     selectedMember === member.id ? 'opacity-100 max-h-20' : 'opacity-0 max-h-0'
                   } overflow-hidden`}>
-                    <p className="text-sm text-gray-600 italic">💡 {member.funFact}</p>
+                    <p className="text-sm text-gray-600 italic"> {member.funFact}</p>
                   </div>
                   
-                  {/* Static hover effects */}
-                  <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-50 transition-opacity duration-300">
-                    <div className="absolute top-2 left-2 text-yellow-300 text-sm">✨</div>
-                    <div className="absolute top-2 right-2 text-pink-300 text-sm">💫</div>
-                    <div className="absolute bottom-2 left-2 text-cyan-300 text-sm">⭐</div>
-                    <div className="absolute bottom-2 right-2 text-purple-300 text-sm">🎉</div>
-                  </div>
                 </div>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Team stats */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="text-center">
-            <div className="text-4xl font-bold text-shirin-blue">5</div>
-            <div className="text-gray-600">Amazing Members</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-shirin-purple">1000+</div>
-            <div className="text-gray-600">Happy Hours</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-shirin-pink">∞</div>
-            <div className="text-gray-600">Laughs Shared</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-shirin-blue">💖</div>
-            <div className="text-gray-600">Love Given</div>
-          </div>
         </div>
 
         {/* Join the team button */}
@@ -163,7 +141,7 @@ const Team = () => {
             variant="magical"
             onClick={() => alert("Want to join our team? Send us a message! 💌")}
           >
-            Join Our Team! 🚀
+            Join Our Team!
           </InteractiveButton>
         </div>
       </div>

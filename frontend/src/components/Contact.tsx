@@ -4,7 +4,7 @@ import Alert from "./Alert";
 const Contact = () => {
   const [showAlert, setShowAlert] = useState(false);
   return (
-    <section id="contact" className="flex flex-col items-center justify-center px-6 bg-gradient-to-br from-gray-900 to-gray-800 py-16">
+    <section id="contact" className="flex flex-col items-center justify-center px-6 bg-gradient-to-br from-shirin-blue/20 to-shirin-purple/20 py-16">
       <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-shirin-blue to-shirin-purple bg-clip-text text-transparent">Contact Us</h2>
       <form
         className="w-full max-w-md flex flex-col gap-4"

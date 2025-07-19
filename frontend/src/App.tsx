@@ -46,31 +46,18 @@ function App() {
        {/* Sticky Navbar - appears immediately after header */}
        <Navbar />
        
-       {/* Beautiful section dividers between components */}
-       <SectionDivider variant="wave" height="lg" />
       
-      
-      <ScrollSection effect="scale">
+      <ScrollSection >
         <About />
       </ScrollSection>  
       
-      <ScrollSection effect="slideRight">
+      <ScrollSection >
         <Team />
       </ScrollSection>
-      
-      <SectionDivider variant="wave" height="md" />
-      
-      <ScrollSection effect="glow">
-        <TechStack />
-      </ScrollSection>
-      
-      <SectionDivider variant="geometric" height="md" />
-      
-      <ScrollSection effect="slideUp">
+
+      <ScrollSection>
         <Contact />
       </ScrollSection>
-      
-      <SectionDivider variant="gradient" height="sm" />
       
       <Footer />
     </>

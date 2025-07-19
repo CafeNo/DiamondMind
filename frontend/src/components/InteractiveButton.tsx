@@ -37,17 +37,7 @@ const InteractiveButton = ({
         onMouseUp={() => setIsPressed(false)} // ปล่อยปุ่ม
         onClick={onClick} // เชื่อมกับ onClick ที่ส่งเข้ามา
       >
-        {/* Static sparkle effect */}
-        {isHovered && (
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-2 left-2 text-yellow-300 opacity-70">✨</div>
-            <div className="absolute top-2 right-2 text-pink-300 opacity-70">✨</div>
-            <div className="absolute bottom-2 left-2 text-cyan-300 opacity-70">✨</div>
-            <div className="absolute bottom-2 right-2 text-purple-300 opacity-70">✨</div>
-          </div>
-        )}
-        
-        {/* Ripple effect */}
+        {/* ripple effect เมื่อกด */}
         {isPressed && (
           <div className="absolute inset-0 bg-white opacity-30 rounded-full animate-ping"></div>
         )}
