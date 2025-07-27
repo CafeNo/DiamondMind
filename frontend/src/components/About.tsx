@@ -13,6 +13,26 @@ const About = () => {
     }
   };
 
+  const playClickSound = () => {
+    if (typeof window !== 'undefined' && window.AudioContext) {
+      const audioContext = new AudioContext();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(600, audioContext.currentTime + 0.1);
+
+      gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.1);
+    }
+  };
+
   return (
     <section
       id="about"
@@ -65,8 +85,10 @@ const About = () => {
               rel="noopener noreferrer"
               className="block"
             >
-              <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 interactive cursor-pointer">
-                <div className="text-4xl mb-4">🎮</div>
+              <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 interactive cursor-pointer"
+                    onClick={() => playClickSound()}
+              >
+                <div className="text-4xl mb-4">🎮</div>                  
                 <h3 className="text-xl font-bold text-gray-800 mb-2">Gaming</h3>
                 <p className="text-gray-600">
                   From indie gems to AAA titles, let's explore amazing worlds
@@ -75,7 +97,9 @@ const About = () => {
               </div>
             </a>
 
-            <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 interactive">
+            <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 interactive cursor-pointer"
+                    onClick={() => playClickSound()}
+              >
               <div className="text-4xl mb-4">💬</div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">
                 Community
@@ -90,7 +114,9 @@ const About = () => {
               rel="noopener noreferrer"
               className="block"
             >
-              <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 interactive">
+              <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 interactive cursor-pointer"
+                    onClick={() => playClickSound()}
+              >
                 <div className="text-4xl mb-4">🎵</div>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">Music</h3>
                 <p className="text-gray-600">
@@ -119,19 +145,28 @@ const About = () => {
         <div className="flex flex-wrap justify-center gap-4 mt-8">
           <InteractiveButton
             variant="magical"
-            onClick={() => alert("Thanks for the love! ")}
+            onClick={() => {
+              playClickSound();
+              alert("Thanks for the love! ");
+            }}
           >
             Follow Me! 
           </InteractiveButton>
 
           <InteractiveButton
             variant="magical"
-            onClick={() => window.open("https://www.youtube.com", "_blank")}
+            onClick={() => {
+              playClickSound();
+              window.open("https://www.youtube.com", "_blank"); 
+            }}
           >
             Watch Streams 
           </InteractiveButton>
 
-          <InteractiveButton variant="magical" onClick={handleSecretClick}>
+          <InteractiveButton variant="magical" 
+          onClick={() => {
+            playClickSound(); 
+          }}>
             Secret Button 
           </InteractiveButton>
         </div>
