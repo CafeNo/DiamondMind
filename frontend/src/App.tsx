@@ -56,6 +56,10 @@ function App() {
       </ScrollSection>
 
       <ScrollSection>
+        <TechStack />
+      </ScrollSection>
+
+      <ScrollSection>
         <Contact />
       </ScrollSection>
       

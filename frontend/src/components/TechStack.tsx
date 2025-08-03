@@ -3,9 +3,8 @@ import { motion, useAnimation } from 'framer-motion';
 
 interface TechItem {
   name: string;
-  category: 'frontend' | 'backend' | 'database' | 'deployment' | 'tools' | 'Design & UI';
+  category: string;
   description: string;
-  complexity: number; // 1-5 scale
   color: string;
   connections: string[];
   icon: string;
@@ -17,7 +16,6 @@ const techStack: TechItem[] = [
     name: 'React 18',
     category: 'frontend',
     description: 'Modern component-based UI library with concurrent features',
-    complexity: 4,
     color: '#61DAFB',
     connections: ['TypeScript', 'Vite', 'Tailwind CSS'],
     icon: ''
@@ -26,7 +24,7 @@ const techStack: TechItem[] = [
     name: 'TypeScript',
     category: 'frontend',
     description: 'Type-safe JavaScript superset for enhanced development',
-    complexity: 4,
+
     color: '#3178C6',
     connections: ['React 18', 'Vite'],
     icon: ''
@@ -35,7 +33,6 @@ const techStack: TechItem[] = [
     name: 'Vite',
     category: 'tools',
     description: 'Lightning-fast build tool with HMR and modern bundling',
-    complexity: 3,
     color: '#646CFF',
     connections: ['React 18', 'TypeScript'],
     icon: ''
@@ -44,7 +41,6 @@ const techStack: TechItem[] = [
     name: 'Tailwind CSS',
     category: 'frontend',
     description: 'Utility-first CSS framework for rapid UI development',
-    complexity: 3,
     color: '#06B6D4',
     connections: ['React 18', 'PostCSS'],
     icon: ''
@@ -53,7 +49,6 @@ const techStack: TechItem[] = [
     name: 'GSAP',
     category: 'frontend',
     description: 'Professional-grade animation library for complex animations',
-    complexity: 5,
     color: '#88CE02',
     connections: ['React 18'],
     icon: ''
@@ -62,18 +57,15 @@ const techStack: TechItem[] = [
     name: 'Lenis',
     category: 'frontend',
     description: 'Smooth scrolling library for enhanced user experience',
-    complexity: 3,
     color: '#FF6B6B',
     connections: ['GSAP'],
     icon: ''
   },
   
-  // Backend Technologies
   {
     name: 'Go 1.21',
     category: 'backend',
     description: 'High-performance compiled language for scalable backends',
-    complexity: 4,
     color: '#00ADD8',
     connections: ['Chi Router'],
     icon: ''
@@ -82,18 +74,15 @@ const techStack: TechItem[] = [
     name: 'Chi Router',
     category: 'backend',
     description: 'Lightweight HTTP router for Go with middleware support',
-    complexity: 3,
     color: '#FF7F00',
     connections: ['Go 1.21'],
     icon: ''
   },
   
-  // Tools & Build
   {
     name: 'PostCSS',
     category: 'tools',
     description: 'Tool for transforming CSS with JavaScript plugins',
-    complexity: 3,
     color: '#DD3A0A',
     connections: ['Tailwind CSS'],
     icon: ''
@@ -102,7 +91,6 @@ const techStack: TechItem[] = [
     name: 'Heroicons',
     category: 'frontend',
     description: 'Beautiful hand-crafted SVG icons by Tailwind team',
-    complexity: 1,
     color: '#8B5CF6',
     connections: ['React 18'],
     icon: ''
@@ -136,43 +124,6 @@ const TechStack: React.FC = () => {
     }
   };
 
-  const getComplexityIndicator = (complexity: number) => {
-    return '●'.repeat(complexity) + '○'.repeat(5 - complexity);
-  };
-
-  const renderConnections = () => {
-    if (!selectedTech) return null;
-    
-    return selectedTech.connections.map((connectionName, index) => (
-      <motion.div
-        key={`${selectedTech.name}-${connectionName}`}
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 0.6 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="absolute inset-0 pointer-events-none"
-      >
-        <svg className="w-full h-full">
-          <defs>
-            <linearGradient id={`gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor={selectedTech.color} stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#ffffff" stopOpacity="0.2" />
-            </linearGradient>
-          </defs>
-          <motion.path
-            d={`M 200 200 Q ${200 + Math.random() * 300} ${200 + Math.random() * 300} ${400 + Math.random() * 200} ${400 + Math.random() * 200}`}
-            stroke={`url(#gradient-${index})`}
-            strokeWidth="2"
-            fill="none"
-            strokeDasharray="5,5"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 0.8, delay: index * 0.2 }}
-          />
-        </svg>
-      </motion.div>
-    ));
-  };
-
   return (
     <div className="min-h-screen relative py-20 px-4 overflow-hidden" style={{
       background: 'linear-gradient(180deg, #0a0b2e 0%, #162447 30%, #1f1c52 60%, #3b2f6b 100%)'
@@ -204,30 +155,6 @@ const TechStack: React.FC = () => {
         ))}
         
         {/* Floating Clouds */}
-        {Array.from({ length: 6 }).map((_, i) => (
-          <motion.div
-            key={`cloud-${i}`}
-            className="absolute opacity-10"
-            style={{
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
-              width: Math.random() * 200 + 100 + 'px',
-              height: Math.random() * 100 + 50 + 'px',
-              background: 'radial-gradient(ellipse, rgba(255,255,255,0.3) 0%, transparent 70%)',
-              borderRadius: '50%',
-            }}
-            animate={{
-              x: [0, 50, 0],
-              y: [0, -20, 0],
-              opacity: [0.05, 0.15, 0.05],
-            }}
-            transition={{
-              duration: Math.random() * 20 + 15,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
         
         {/* Magical Particles */}
         {Array.from({ length: 20 }).map((_, i) => (
@@ -278,8 +205,7 @@ const TechStack: React.FC = () => {
         </motion.div>
 
         {/* Tech Stack Grid */}
-        <div className="relative" ref={containerRef}>
-          {renderConnections()}
+        <div className="relative" ref={containerRef}> 
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {techStack.map((tech, index) => (
@@ -337,23 +263,13 @@ const TechStack: React.FC = () => {
                     {tech.category.toUpperCase()}
                   </div>
                   
-                  {/* Complexity Indicator */}
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm text-gray-400">Complexity:</span>
-                    <span className="text-sm font-mono" style={{ color: tech.color }}>
-                      {getComplexityIndicator(tech.complexity)}
-                    </span>
-                  </div>
+
                   
                   {/* Description */}
                   <p className="text-sm text-gray-300 leading-relaxed">
                     {tech.description}
                   </p>
                   
-                  {/* Connections count */}
-                  <div className="mt-4 text-xs text-gray-500">
-                    {tech.connections.length} connections
-                  </div>
                   
                   {/* Hover pulse effect */}
                   <motion.div
@@ -370,34 +286,6 @@ const TechStack: React.FC = () => {
                 </div>
                 
                 {/* Floating complexity particles */}
-                {hoveredTech === tech.name && (
-                  <div className="absolute inset-0 pointer-events-none">
-                    {Array.from({ length: tech.complexity }).map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute w-2 h-2 rounded-full"
-                        style={{ backgroundColor: tech.color }}
-                        initial={{ 
-                          opacity: 0,
-                          x: Math.random() * 200 - 100,
-                          y: Math.random() * 200 - 100,
-                          scale: 0
-                        }}
-                        animate={{ 
-                          opacity: [0, 1, 0],
-                          scale: [0, 1, 0],
-                          y: [0, -50, -100]
-                        }}
-                        transition={{ 
-                          duration: 2,
-                          delay: i * 0.2,
-                          repeat: Infinity,
-                          repeatDelay: 1
-                        }}
-                      />
-                    ))}
-                  </div>
-                )}
               </motion.div>
             ))}
           </div>
@@ -427,73 +315,13 @@ const TechStack: React.FC = () => {
                 <h4 className="text-xl font-semibold text-white mb-4">Technical Details</h4>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-400">Category:</span>
-                    <span className="text-white font-medium">{selectedTech.category}</span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-400">Complexity Level:</span>
-                    <span className="text-white font-mono">{getComplexityIndicator(selectedTech.complexity)}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-400">Connections:</span>
-                    <span className="text-white font-medium">{selectedTech.connections.length}</span>
-                  </div>
+
                 </div>
-              </div>
-              
-              <div>
-                <h4 className="text-xl font-semibold text-white mb-4">Connected Technologies</h4>
-                <div className="flex flex-wrap gap-2">
-                  {selectedTech.connections.map((connection, index) => (
-                    <motion.span
-                      key={connection}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="px-3 py-1 bg-gray-800 rounded-full text-sm text-gray-300 border border-gray-600"
-                    >
-                      {connection}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
+              </div>   
             </div>
           </motion.div>
         )}
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-6"
-        >
-          <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-blue-500/30">
-            <div className="text-4xl font-bold text-blue-400 mb-2">{techStack.length}</div>
-            <div className="text-gray-300">Technologies</div>
-          </div>
-          
-          <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-green-500/20 to-teal-500/20 border border-green-500/30">
-            <div className="text-4xl font-bold text-green-400 mb-2">
-              {new Set(techStack.map(t => t.category)).size}
-            </div>
-            <div className="text-gray-300">Categories</div>
-          </div>
-          
-          <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border border-yellow-500/30">
-            <div className="text-4xl font-bold text-yellow-400 mb-2">
-              {techStack.reduce((sum, tech) => sum + tech.complexity, 0)}
-            </div>
-            <div className="text-gray-300">Total Complexity</div>
-          </div>
-          
-          <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30">
-            <div className="text-4xl font-bold text-purple-400 mb-2">
-              {techStack.reduce((sum, tech) => sum + tech.connections.length, 0)}
-            </div>
-            <div className="text-gray-300">Connections</div>
-          </div>
-        </motion.div>
       </div>
     </div>
   );
