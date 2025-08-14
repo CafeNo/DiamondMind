@@ -6,95 +6,25 @@ interface TechItem {
   category: string;
   description: string;
   color: string;
-  connections: string[];
   icon: string;
 }
 
 const techStack: TechItem[] = [
   // Frontend Technologies
   {
-    name: 'React 18',
-    category: 'frontend',
+    name: 'Shirin',
+    category: 'VTuber',
     description: 'Modern component-based UI library with concurrent features',
     color: '#61DAFB',
-    connections: ['TypeScript', 'Vite', 'Tailwind CSS'],
-    icon: ''
+    icon: 's'
   },
   {
-    name: 'TypeScript',
-    category: 'frontend',
+    name: 'CafeNo',
+    category: 'Chief Executive Officer',
     description: 'Type-safe JavaScript superset for enhanced development',
-
     color: '#3178C6',
-    connections: ['React 18', 'Vite'],
     icon: ''
   },
-  {
-    name: 'Vite',
-    category: 'tools',
-    description: 'Lightning-fast build tool with HMR and modern bundling',
-    color: '#646CFF',
-    connections: ['React 18', 'TypeScript'],
-    icon: ''
-  },
-  {
-    name: 'Tailwind CSS',
-    category: 'frontend',
-    description: 'Utility-first CSS framework for rapid UI development',
-    color: '#06B6D4',
-    connections: ['React 18', 'PostCSS'],
-    icon: ''
-  },
-  {
-    name: 'GSAP',
-    category: 'frontend',
-    description: 'Professional-grade animation library for complex animations',
-    color: '#88CE02',
-    connections: ['React 18'],
-    icon: ''
-  },
-  {
-    name: 'Lenis',
-    category: 'frontend',
-    description: 'Smooth scrolling library for enhanced user experience',
-    color: '#FF6B6B',
-    connections: ['GSAP'],
-    icon: ''
-  },
-  
-  {
-    name: 'Go 1.21',
-    category: 'backend',
-    description: 'High-performance compiled language for scalable backends',
-    color: '#00ADD8',
-    connections: ['Chi Router'],
-    icon: ''
-  },
-  {
-    name: 'Chi Router',
-    category: 'backend',
-    description: 'Lightweight HTTP router for Go with middleware support',
-    color: '#FF7F00',
-    connections: ['Go 1.21'],
-    icon: ''
-  },
-  
-  {
-    name: 'PostCSS',
-    category: 'tools',
-    description: 'Tool for transforming CSS with JavaScript plugins',
-    color: '#DD3A0A',
-    connections: ['Tailwind CSS'],
-    icon: ''
-  },
-  {
-    name: 'Heroicons',
-    category: 'frontend',
-    description: 'Beautiful hand-crafted SVG icons by Tailwind team',
-    color: '#8B5CF6',
-    connections: ['React 18'],
-    icon: ''
-  }
 ];
 
 const TechStack: React.FC = () => {
@@ -114,8 +44,8 @@ const TechStack: React.FC = () => {
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'frontend': return 'from-blue-500 to-purple-600';
-      case 'backend': return 'from-green-500 to-teal-600';
+      case 'VTuber': return 'from-blue-500 to-purple-600';
+      case 'Chief Executive Officer': return 'from-green-500 to-teal-600';
       case 'database': return 'from-yellow-500 to-orange-600';
       case 'deployment': return 'from-red-500 to-pink-600';
       case 'tools': return 'from-gray-500 to-slate-600';
@@ -316,7 +246,6 @@ const TechStack: React.FC = () => {
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                   </div>
-
                 </div>
               </div>   
             </div>
