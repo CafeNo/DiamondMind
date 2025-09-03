@@ -7,6 +7,7 @@ interface TechItem {
   description: string;
   color: string;
   icon: string;
+  image: string;
 }
 
 const techStack: TechItem[] = [
@@ -16,14 +17,16 @@ const techStack: TechItem[] = [
     category: 'VTuber',
     description: 'Modern component-based UI library with concurrent features',
     color: '#61DAFB',
-    icon: 's'
+    icon: '',
+    image: '/85_20250728181816.png'
   },
   {
     name: 'CafeNo',
     category: 'Chief Executive Officer',
     description: 'Type-safe JavaScript superset for enhanced development',
     color: '#3178C6',
-    icon: ''
+    icon: '',
+    image: '/85_20250728181829.png'
   },
 ];
 
@@ -232,22 +235,48 @@ const TechStack: React.FC = () => {
               background: `linear-gradient(135deg, ${selectedTech.color}20, ${selectedTech.color}05)`
             }}
           >
-            <div className="flex items-center mb-6">
-              <span className="text-6xl mr-4">{selectedTech.icon}</span>
-              <div>
-                <h3 className="text-4xl font-bold text-white mb-2">{selectedTech.name}</h3>
-                <p className="text-xl text-gray-300">{selectedTech.description}</p>
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h4 className="text-xl font-semibold text-white mb-4">Technical Details</h4>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              {/* Tech info */}
+              <div className="space-y-6">
+                <div className="flex items-center mb-6">
+                  <span className="text-6xl mr-4">{selectedTech.icon}</span>
+                  <div>
+                    <h3 className="text-4xl font-bold text-white mb-2">{selectedTech.name}</h3>
+                    <p className="text-xl text-gray-300">{selectedTech.description}</p>
                   </div>
                 </div>
-              </div>   
+                
+                <div>
+                  <h4 className="text-xl font-semibold text-white mb-4">Technical Details</h4>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Image */}
+              <div className="flex justify-center lg:justify-end">
+                {selectedTech.image ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, x: 20 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="relative"
+                  >
+                    <img
+                      src={selectedTech.image}
+                      alt={selectedTech.name}
+                      className="w-64 h-auto rounded-2xl border border-white/10 shadow-2xl object-cover"
+                      style={{
+                        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(59, 130, 246, 0.2)'
+                      }}
+                    />
+                  </motion.div>
+                ) : (
+                  <div className="w-64 h-64 rounded-2xl bg-gray-700/30 border border-white/10" />
+                )}
+              </div>
             </div>
           </motion.div>
         )}
