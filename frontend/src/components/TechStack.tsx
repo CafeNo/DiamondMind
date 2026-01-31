@@ -28,6 +28,46 @@ const techStack: TechItem[] = [
     icon: '',
     image: '/85_20250728181829.png'
   },
+  {
+    name: 'Sprite',
+    category: 'Chief Executive Officer',
+    description: 'Type-safe JavaScript superset for enhanced development',
+    color: '#3178C6',
+    icon: '',
+    image: '/85_20250728182452.png'
+  },
+  {
+    name: 'Ohm',
+    category: 'Chief Executive Officer',
+    description: 'Type-safe JavaScript superset for enhanced development',
+    color: '#3178C6',
+    icon: '',
+    image: '/85_20250728182231.png'
+  },
+  {
+    name: '1',
+    category: 'Chief Executive Officer',
+    description: 'Type-safe JavaScript superset for enhanced development',
+    color: '#3178C6',
+    icon: '',
+    image: '/85_20250728181848.png'
+  },
+  {
+    name: 'Praew',
+    category: 'Chief Executive Officer',
+    description: 'Type-safe JavaScript superset for enhanced development',
+    color: '#3178C6',
+    icon: '',
+    image: '/85_20250728181834.png'
+  },
+  {
+    name: '2',
+    category: 'Chief Executive Officer',
+    description: 'Type-safe JavaScript superset for enhanced development',
+    color: '#3178C6',
+    icon: '',
+    image: '/85_20250728181805.png'
+  },
 ];
 
 const TechStack: React.FC = () => {
