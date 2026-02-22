@@ -1,47 +1,24 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 const Navbar = () => {
   const [activeItem, setActiveItem] = useState('home');
   const [bubbleStyle, setBubbleStyle] = useState({});
-  const navRef = useRef(null);
+  const navRef = useRef<HTMLUListElement>(null);
 
   const navItems = [
     { id: 'home', label: 'Home', href: '#home' },
     { id: 'about', label: 'About', href: '#about' },
     { id: 'team', label: 'Team', href: '#team' },
-    { id: 'contact', label: 'Contact', href: '#contact' },
+    
   ];
 
-  // Intersection Observer for automatic active item detection
-  useEffect(() => {
-    const sections = navItems.map(item => document.querySelector(item.href) as HTMLElement).filter(Boolean);
-    
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const sectionId = entry.target.id;
-            setActiveItem(sectionId);
-          }
-        });
-      },
-      {
-        threshold: 0.3,
-        rootMargin: '-100px 0px -50% 0px'
-      }
-    );
-
-    sections.forEach(section => {
-      if (section) observer.observe(section);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const updateBubblePosition = () => {
+  // 1. ฟังก์ชันคำนวณตำแหน่ง Bubble (ใส่ useCallback เพื่อไม่ให้มันถูกสร้างใหม่มั่วๆ)
+  const updateBubblePosition = useCallback(() => {
     if (!navRef.current) return;
     
+    // หา element ของ link ที่ active อยู่
     const activeLink = navRef.current.querySelector(`a[data-nav-item="${activeItem}"]`) as HTMLElement;
+    
     if (activeLink) {
       const navRect = navRef.current.getBoundingClientRect();
       const linkRect = activeLink.getBoundingClientRect();
@@ -49,37 +26,60 @@ const Navbar = () => {
       setBubbleStyle({
         left: linkRect.left - navRect.left,
         width: linkRect.width,
-        transform: 'translateY(-50%)',
+        transform: 'translateY(-50%)', // จัดให้อยู่กึ่งกลางแนวตั้ง
       });
     }
-  };
+  }, [activeItem]); // ฟังก์ชันนี้จะเปลี่ยนเมื่อ activeItem เปลี่ยนเท่านั้น
 
-  // Initial bubble position setup
+  // 2. Observer สำหรับตรวจจับการ Scroll (ปรับปรุงให้ทำงานเสถียรขึ้น)
   useEffect(() => {
-    setTimeout(() => updateBubblePosition(), 100); // Small delay to ensure DOM is ready
-  }, [updateBubblePosition]);
+    const sections = navItems.map(item => document.querySelector(item.href)).filter(Boolean);
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveItem(entry.target.id);
+          }
+        });
+      },
+      {
+        threshold: 0.3, // เห็น section 30% ให้ถือว่า active
+        // rootMargin ลบค่าความสูง Navbar ออก (สมมติ Navbar สูง 80-100px) เพื่อให้ Active เป๊ะตอนเลื่อนถึง
+        rootMargin: '-100px 0px -20% 0px' 
+      }
+    );
 
-  // Update bubble position when active item changes
-  useEffect(() => {
-    updateBubblePosition();
-  }, [activeItem, updateBubblePosition]);
+    sections.forEach((section) => {
+      if (section) observer.observe(section);
+    });
 
-  // Update bubble position on window resize
+    return () => observer.disconnect();
+  }, [navItems]); // dependency
+
+  // 3. Effect สำหรับอัปเดต Bubble เมื่อ activeItem เปลี่ยน หรือหน้าจอ Resize
   useEffect(() => {
+    // รอให้ DOM render เสร็จนิดนึงแล้วค่อยคำนวณ
+    const timeoutId = setTimeout(() => {
+        updateBubblePosition();
+    }, 50);
+
     const handleResize = () => updateBubblePosition();
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [updateBubblePosition]);
 
+    return () => {
+        clearTimeout(timeoutId);
+        window.removeEventListener('resize', handleResize);
+    };
+  }, [updateBubblePosition]); // ทำงานเมื่อ updateBubblePosition (ซึ่งผูกกับ activeItem) เปลี่ยน
 
-
+  // 4. Handle Click แบบ Smooth Scroll
   const handleNavClick = (itemId: string, href: string) => {
-    setActiveItem(itemId);
+    setActiveItem(itemId); // set active ทันทีที่กดเพื่อให้ UI ตอบสนองเร็ว
     
-    // Improved smooth scroll to target section
     const targetElement = document.querySelector(href) as HTMLElement;
     if (targetElement) {
-      const navbarHeight = 100; // Account for navbar height
+      const navbarHeight = 100; // ความสูง Navbar ที่จะเผื่อไว้
       const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
       
       window.scrollTo({
@@ -87,13 +87,11 @@ const Navbar = () => {
         behavior: 'smooth'
       });
     }
-    
-
   };
 
   return (
     <nav 
-      className="sticky top-0 w-full bg-gradient-to-r from-shirin-blue/80 to-shirin-red/100 border-gray-200 dark:bg-gray-900/80 dark:bg-opacity-20 opacity-95 backdrop-blur-md z-[999] shadow-lg"
+      className="sticky top-0 w-full bg-gradient-to-r from-shirin-blue/80 to-shirin-red/100 border-gray-200 dark:bg-gray-900/80 opacity-95 backdrop-blur-md shadow-lg"
       style={{
         position: 'sticky',
         top: 0,
@@ -124,30 +122,17 @@ const Navbar = () => {
                   e.preventDefault();
                   handleNavClick(item.id, item.href);
                 }}
-                className={`relative px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 font-semibold interactive z-20 ${
+                className={`relative px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 font-semibold interactive z-20 block ${
                   activeItem === item.id 
                     ? 'text-white shadow-lg' 
                     : 'hover:text-white hover:shadow-lg'
                 }`}
               >
                 {item.label}
-                {/* Static sparkle effect on hover */}
-                <div className="absolute inset-0 pointer-events-none opacity-0 hover:opacity-30 transition-opacity duration-300">
-                  <div className="absolute -top-1 -left-1 text-shirin-pink text-xs"></div>
-                  <div className="absolute -top-1 -right-1 text-shirin-blue text-xs"></div>
-                </div>
               </a>
             </li>
           ))}
           </ul>
-        </div>
-        
-        {/* Static floating elements */}
-        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-          <div className="text-shirin-blue opacity-50 text-2xl"></div>
-        </div>
-        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-          <div className="text-shirin-purple opacity-50 text-2xl"></div>
         </div>
       </div>
     </nav>

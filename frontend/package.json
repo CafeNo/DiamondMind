@@ -18,7 +18,8 @@
         "react-intersection-observer": "^9.16.0"
     },
     "devDependencies": {
-        "@types/react": "^19.2.8",
+        "@types/react": "^19.2.9",
+        "@types/react-dom": "^19.2.3",
         "@vitejs/plugin-react": "^4.0.4",
         "autoprefixer": "^10.4.19",
         "postcss": "^8.4.32",

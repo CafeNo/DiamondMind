@@ -58,10 +58,6 @@ function App() {
       <ScrollSection>
         <TechStack />
       </ScrollSection>
-
-      <ScrollSection>
-        <Contact />
-      </ScrollSection>
       
       <Footer />
     </>
