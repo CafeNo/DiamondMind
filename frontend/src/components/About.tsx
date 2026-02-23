@@ -142,35 +142,6 @@ const About = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 mt-8">
-          <InteractiveButton
-            variant="magical"
-            onClick={() => {
-              playClickSound();
-              alert("Thanks for the love! ");
-            }}
-          >
-            Follow Me! 
-          </InteractiveButton>
-
-          <InteractiveButton
-            variant="magical"
-            onClick={() => {
-              playClickSound();
-              window.open("https://www.youtube.com", "_blank"); 
-            }}
-          >
-            Watch Streams 
-          </InteractiveButton>
-
-          <InteractiveButton variant="magical" 
-          onClick={() => {
-            playClickSound(); 
-          }}>
-            Secret Button 
-          </InteractiveButton>
-        </div>
-
         {/* Secret message */}
         {showSecret && (
           <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">

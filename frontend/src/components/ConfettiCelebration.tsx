@@ -94,4 +94,4 @@ const ConfettiCelebration = ({ trigger }: { trigger: boolean }) => {
   );
 };
 
-export default ConfettiCelebration; 
+export default ConfettiCelebration;

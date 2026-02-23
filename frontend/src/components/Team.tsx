@@ -134,16 +134,6 @@ const Team = () => {
             </div>
           ))}
         </div>
-
-        {/* Join the team button */}
-        <div className="mt-12">
-          <InteractiveButton 
-            variant="magical"
-            onClick={() => alert("Want to join our team? Send us a message! 💌")}
-          >
-            Join Our Team!
-          </InteractiveButton>
-        </div>
       </div>
     </section>
   );
