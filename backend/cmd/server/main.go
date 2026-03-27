@@ -1,17 +1,23 @@
 package main
 
 import (
-    "log"
-    "net/http"
+	"log"
+	"net/http"
+	"os"
 
-    delivery "companysite/internal/delivery/http"
-    "companysite/internal/usecase"
+	delivery "companysite/internal/delivery/http"
+	"companysite/internal/usecase"
 )
 
 func main() {
-    uc := usecase.NewCompanyUsecase()
-    router := delivery.NewRouter(uc)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 
-    log.Println("🚀  Server running at http://localhost:8080")
-    log.Fatal(http.ListenAndServe(":8080", router))
+	uc := usecase.NewCompanyUsecase()
+	router := delivery.NewRouter(uc)
+
+	log.Printf("Server running at http://localhost:%s", port)
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }

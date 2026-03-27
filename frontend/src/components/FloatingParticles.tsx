@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
 interface Particle {
   id: number;
@@ -9,95 +9,92 @@ interface Particle {
   speedY: number;
   rotation: number;
   rotationSpeed: number;
-  type: 'circle' | 'square' | 'triangle';
+  type: "heart" | "star" | "sparkle";
   opacity: number;
 }
+
+const createParticles = (count = 20): Particle[] =>
+  Array.from({ length: count }, (_, i) => ({
+    id: i,
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    size: Math.random() * 10 + 5,
+    speedX: (Math.random() - 0.5) * 0.3,
+    speedY: (Math.random() - 0.5) * 0.3,
+    rotation: Math.random() * 360,
+    rotationSpeed: (Math.random() - 0.5) * 2,
+    type: (["heart", "star", "sparkle"] as const)[Math.floor(Math.random() * 3)],
+    opacity: Math.random() * 0.5 + 0.3,
+  }));
 
 const FloatingParticles = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
 
+  const viewportRef = useRef({ w: window.innerWidth, h: window.innerHeight });
+
   useEffect(() => {
-    // Create initial particles
-    const initialParticles: Particle[] = Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      size: Math.random() * 10 + 5,
-      speedX: (Math.random() - 0.5) * 0.3,
-      speedY: (Math.random() - 0.5) * 0.3,
-      rotation: Math.random() * 360,
-      rotationSpeed: (Math.random() - 0.5) * 1,
-      type: ['circle', 'square', 'triangle'][Math.floor(Math.random() * 3)] as 'circle' | 'square' | 'triangle',
-      opacity: Math.random() * 0.3 + 0.1,
-    }));
+    setParticles(createParticles(20));
 
-    setParticles(initialParticles);
+    const handleResize = () => {
+      viewportRef.current = { w: window.innerWidth, h: window.innerHeight };
+    };
+    window.addEventListener("resize", handleResize);
 
-    // Animation loop
-    const animate = () => {
-      setParticles(prevParticles =>
-        prevParticles.map(particle => {
-          const newX = particle.x + particle.speedX;
-          const newY = particle.y + particle.speedY;
-          
+    const interval = setInterval(() => {
+      const { w, h } = viewportRef.current;
+      setParticles((prev) =>
+        prev.map((p) => {
+          const newX = p.x + p.speedX;
+          const newY = p.y + p.speedY;
           return {
-            ...particle,
-            x: newX > window.innerWidth + 50 ? -50 : newX < -50 ? window.innerWidth + 50 : newX,
-            y: newY > window.innerHeight + 50 ? -50 : newY < -50 ? window.innerHeight + 50 : newY,
-            rotation: particle.rotation + particle.rotationSpeed,
+            ...p,
+            x: newX > w + 50 ? -50 : newX < -50 ? w + 50 : newX,
+            y: newY > h + 50 ? -50 : newY < -50 ? h + 50 : newY,
+            rotation: p.rotation + p.rotationSpeed,
           };
         })
       );
+    }, 100);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("resize", handleResize);
     };
-
-    const interval = setInterval(animate, 100);
-
-    return () => clearInterval(interval);
   }, []);
 
-  const renderParticle = (particle: Particle) => {
-    const style = {
-      left: particle.x,
-      top: particle.y,
-      transform: `rotate(${particle.rotation}deg)`,
-      opacity: particle.opacity,
-      width: particle.size,
-      height: particle.size,
+  const colors = ["rgba(161,234,251,0.3)", "rgba(202,187,233,0.3)", "rgba(255,206,243,0.3)"];
+
+  const renderParticle = (p: Particle) => {
+    const color = colors[p.id % colors.length];
+    const style: React.CSSProperties = {
+      left: p.x,
+      top: p.y,
+      transform: `rotate(${p.rotation}deg)`,
+      opacity: p.opacity,
+      width: p.size,
+      height: p.size,
     };
 
-    const colors = ['bg-shirin-blue/30', 'bg-shirin-purple/30', 'bg-shirin-pink/30'];
-    const color = colors[particle.id % colors.length];
-
-    switch (particle.type) {
-      case 'circle':
+    switch (p.type) {
+      case "heart":
+      case "star":
         return (
           <div
-            key={particle.id}
-            className={`absolute pointer-events-none rounded-full ${color}`}
-            style={style}
+            key={p.id}
+            className="absolute pointer-events-none rounded-full"
+            style={{ ...style, background: color }}
           />
         );
-      case 'square':
+      case "sparkle":
         return (
-          <div
-            key={particle.id}
-            className={`absolute pointer-events-none ${color}`}
-            style={style}
-          />
-        );
-      case 'triangle':
-        return (
-          <div
-            key={particle.id}
-            className="absolute pointer-events-none"
-            style={style}
-          >
-            <div 
-              className={`w-0 h-0 border-l-2 border-r-2 border-b-4 border-transparent ${color.replace('bg-', 'border-b-')}`}
-              style={{ 
-                borderLeftWidth: particle.size / 2,
-                borderRightWidth: particle.size / 2,
-                borderBottomWidth: particle.size
+          <div key={p.id} className="absolute pointer-events-none" style={style}>
+            <div
+              style={{
+                width: 0,
+                height: 0,
+                borderLeft: `${p.size / 2}px solid transparent`,
+                borderRight: `${p.size / 2}px solid transparent`,
+                borderBottom: `${p.size}px solid ${color}`,
               }}
             />
           </div>
@@ -112,4 +109,4 @@ const FloatingParticles = () => {
   );
 };
 
-export default FloatingParticles; 
+export default FloatingParticles;

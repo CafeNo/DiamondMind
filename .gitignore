@@ -6,6 +6,7 @@
 
 # Dependencies
 frontend/node_modules/
+# package-lock.json is intentionally excluded — regenerate with `npm install`
 frontend/package-lock.json
 
 # Build outputs
@@ -19,8 +20,9 @@ frontend/.env.development.local
 frontend/.env.test.local
 frontend/.env.production.local
 
-# Vite
+# Vite cache (covers both .vite/ root cache and node_modules/.vite/)
 frontend/.vite/
+frontend/node_modules/.vite/
 frontend/vite.config.ts.timestamp-*
 
 # TypeScript
@@ -32,6 +34,12 @@ frontend/.eslintcache
 # =============================================================================
 # BACKEND (Go)
 # =============================================================================
+
+# Environment / secrets — NEVER commit these
+backend/.env
+backend/.env.*
+.env
+.env.*
 
 # Binaries for programs and plugins
 backend/*.exe
@@ -103,10 +111,7 @@ coverage/
 # Production environment files
 .env.production
 
-# Docker
-.dockerignore
-Dockerfile
-docker-compose.yml
+# Docker — only ignore override file (main Dockerfile & compose should be committed)
 docker-compose.override.yml
 
 # =============================================================================
