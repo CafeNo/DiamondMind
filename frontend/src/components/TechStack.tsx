@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react'; // แก้ไข: เพิ่ม useMemo
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 
 interface TechItem {
@@ -15,57 +15,54 @@ const techStack: TechItem[] = [
     category: 'VTuber',
     description: 'Modern component-based UI library with concurrent features',
     color: '#61DAFB',
-    image: '/85_20250728181816.png'
+    image: '/profile-shirin.png'
   },
   {
     name: 'CafeNo',
     category: 'Chief Executive Officer',
     description: 'Type-safe JavaScript superset for enhanced development',
     color: '#3178C6',
-    image: '/85_20250728181829.png'
+    image: '/profile-cafeno.png'
   },
   {
     name: 'Sprite',
     category: 'Chief Executive Officer',
     description: 'Type-safe JavaScript superset for enhanced development',
     color: '#3178C6',
-    image: '/85_20250728182452.png'
+    image: '/profile-sprite.png'
   },
   {
     name: 'Ohm',
     category: 'Chief Executive Officer',
     description: 'Type-safe JavaScript superset for enhanced development',
     color: '#3178C6',
-    image: '/85_20250728182231.png'
+    image: '/profile-kanun.png'
   },
   {
     name: '1',
     category: 'Chief Executive Officer',
     description: 'Type-safe JavaScript superset for enhanced development',
     color: '#3178C6',
-    image: '/85_20250728181848.png'
+    image: '/profile-kokaw.png'
   },
   {
     name: 'Praew',
     category: 'Chief Executive Officer',
     description: 'Type-safe JavaScript superset for enhanced development',
     color: '#3178C6',
-    image: '/85_20250728181834.png'
+    image: '/profile-bobken.png'
   },
   {
     name: '2',
     category: 'Chief Executive Officer',
     description: 'Type-safe JavaScript superset for enhanced development',
     color: '#3178C6',
-    image: '/85_20250728181805.png'
+    image: '/profile-ohm.png'
   },
-]; // แก้ไข: เพิ่มเครื่องหมายปิด ] และ ; ตรงนี้
+];
 
 const TechStack: React.FC = () => {
   const [selectedTech, setSelectedTech] = useState<TechItem | null>(null);
-  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
   const stars = useMemo(() => {
     return Array.from({ length: 100 }).map((_, i) => ({
       id: i,
@@ -159,7 +156,7 @@ const TechStack: React.FC = () => {
           </p>
         </motion.div>
 
-        <div className="relative" ref={containerRef}> 
+        <div className="relative">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {techStack.map((tech, index) => (
               <motion.div
@@ -169,8 +166,6 @@ const TechStack: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="relative group"
-                onMouseEnter={() => setHoveredTech(tech.name)}
-                onMouseLeave={() => setHoveredTech(null)}
                 onClick={() => setSelectedTech(selectedTech?.name === tech.name ? null : tech)}
               >
                 <div className={`

@@ -25,18 +25,19 @@ const MagicalEffects = ({ variant = 'full', intensity = 'medium' }: MagicalEffec
     // Generate static bubbles (no animation)
     if (variant === 'full' || variant === 'bubbles') {
       for (let i = 0; i < currentCounts.bubbles; i++) {
+        const size = (2 + Math.floor(Math.random() * 4)) * 4; // convert Tailwind units to px
         elements.push(
           <div
             key={`bubble-${i}`}
-            className="absolute pointer-events-none"
+            className="absolute pointer-events-none rounded-full opacity-30"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
+              width: `${size}px`,
+              height: `${size}px`,
+              background: getRandomBubbleGradient(),
             }}
-          >
-            <div className={`w-${2 + Math.floor(Math.random() * 4)} h-${2 + Math.floor(Math.random() * 4)} rounded-full bg-gradient-to-br ${getRandomBubbleColor()} opacity-30`}>
-            </div>
-          </div>
+          />
         );
       }
     }
@@ -84,15 +85,15 @@ const MagicalEffects = ({ variant = 'full', intensity = 'medium' }: MagicalEffec
     setEffectElements(elements);
   };
 
-  const getRandomBubbleColor = () => {
-    const colors = [
-      'from-shirin-blue to-shirin-purple',
-      'from-shirin-purple to-shirin-pink',
-      'from-shirin-pink to-shirin-blue',
-      'from-shirin-blue to-shirin-white',
-      'from-shirin-purple to-shirin-white'
+  const getRandomBubbleGradient = () => {
+    const gradients = [
+      'linear-gradient(135deg, #A1EAFB, #CABBE9)',
+      'linear-gradient(135deg, #CABBE9, #FFCEF3)',
+      'linear-gradient(135deg, #FFCEF3, #A1EAFB)',
+      'linear-gradient(135deg, #A1EAFB, #FDFDFD)',
+      'linear-gradient(135deg, #CABBE9, #FDFDFD)',
     ];
-    return colors[Math.floor(Math.random() * colors.length)];
+    return gradients[Math.floor(Math.random() * gradients.length)];
   };
 
   const getRandomStatColor = () => {
@@ -104,7 +105,6 @@ const MagicalEffects = ({ variant = 'full', intensity = 'medium' }: MagicalEffec
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
       {effectElements}
       
-      {/* Static ambient effects (no animation) */}
       <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-shirin-blue/5 rounded-full blur-2xl"></div>
       <div className="absolute bottom-1/3 right-1/4 w-40 h-40 bg-shirin-purple/5 rounded-full blur-3xl"></div>
       <div className="absolute top-1/2 left-1/2 w-24 h-24 bg-shirin-pink/5 rounded-full blur-xl"></div>
